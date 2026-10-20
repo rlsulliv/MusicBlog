@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Randi’s Music Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="hero">
+      <div>
+        <h1>Randi’s <em>Music</em> Log</h1>
+        <p class="tag">Albums I’m listening to, and the songs that wandered in on their own.</p>
+      </div>
+      <div class="heroArt" id="heroArt"></div>
+    </div>
+    <nav aria-label="Sections"><a href="#albums">Albums</a><a href="#songs">Songs</a></nav>
+  </header>
+  <section id="albums"><div class="hd"><h2>Albums</h2></div><div class="albums" id="albumList"></div></section>
+  <section id="songs"><div class="hd"><h2>Songs</h2></div><ul class="songs" id="songList"></ul></section>
+  <footer id="foot"></footer>
+</div>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
