@@ -66,3 +66,8 @@ footer{margin-top:64px;color:var(--muted);font-size:.9rem;border-top:1px solid v
 .badge.hate{border-color:#b3261e;color:#b3261e}
 li.hate{color:var(--muted);text-decoration:line-through}
 @media (prefers-color-scheme:dark){.badge.hate{border-color:#ff8a80;color:#ff8a80}}
+
+.songs li{display:block}
+.songText{margin-top:4px}
+.songText small{display:inline;color:var(--muted)}
+.lyric{font-family:"Tinos",Georgia,serif;font-style:italic;font-size:1.1rem;color:var(--accent);margin-right:8px}

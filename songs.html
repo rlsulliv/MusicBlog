@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Random Songs I Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Random <em>Songs</em> I Love</h1>
+    <p class="tag">Songs that wandered in without an album attached.</p>
+    <nav aria-label="Pages"><a href="index.html">Home</a><a href="index.html#albums">Albums</a><a href="songs.html">Random Songs</a></nav>
+  </header>
+  <section>
+    <div class="hd"><h2>Songs</h2><button type="button" id="sortBtn" class="sortBtn">Sort: my order</button></div>
+    <ul class="songs" id="randomList"></ul>
+  </section>
+  <footer id="foot"></footer>
+</div>
+<script src="data.js"></script>
+<script src="songs.js"></script>
+</body>
+</html>

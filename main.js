@@ -35,7 +35,7 @@ function renderSongs() {
     const t = s.link ? `<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title);
     const r = RATING[s.rating];
     const badge = r ? `<em class="badge ${r.cls}">${r.label}</em>` : "";
-    return `<li><span><span>${t}</span> <small>${esc(s.artist)}</small> ${badge}</span>${s.note ? `<small>${esc(s.note)}</small>` : ""}</li>`;
+    return `<li><div class="songHead"><span>${t}</span> <small>${esc(s.artist)}</small> ${badge}</div>${s.lyric || s.note ? `<div class="songText">${s.lyric ? `<q class="lyric">${esc(s.lyric)}</q>` : ""}${s.note ? `<small>${esc(s.note)}</small>` : ""}</div>` : ""}</li>`;
   }).join("") : `<li class="empty">No songs yet. Add one in the SONGS list.</li>`;
 }
 
