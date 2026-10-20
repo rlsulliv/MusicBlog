@@ -3,7 +3,10 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt
 document.getElementById("albumList").innerHTML = ALBUMS.length ? ALBUMS.map(a => {
   const stars = a.rating ? "★".repeat(a.rating) + "☆".repeat(5 - a.rating) : "";
   const cover = a.cover ? `<img src="${esc(a.cover)}" alt="Cover of ${esc(a.title)}">` : `<span aria-hidden="true">${esc(a.title[0])}</span>`;
-  const tracks = (a.tracks || []).map(t => `<li${(a.favorites||[]).includes(t) ? ' class="fav"' : ""}>${esc(t)}</li>`).join("");
+  const tracks = (a.tracks || []).map(t => {
+  const c = (a.favorites || []).includes(t) ? "fav" : (a.hated || []).includes(t) ? "hate" : "";
+  return `<li${c ? ` class="${c}"` : ""}>${esc(t)}</li>`;
+}).join("");
   return `<article class="album">
     <div class="cover" style="--c:${esc(a.color || "#8a63c4")}">${cover}</div>
     <div class="info">
@@ -15,10 +18,33 @@ document.getElementById("albumList").innerHTML = ALBUMS.length ? ALBUMS.map(a =>
     </div></article>`;
 }).join("") : `<p class="empty">No albums yet. Add one in the ALBUMS list.</p>`;
 
-document.getElementById("songList").innerHTML = SONGS.length ? SONGS.map(s => {
-  const t = s.link ? `<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title);
-  return `<li><span><span>${t}</span> <small>${esc(s.artist)}</small></span>${s.note ? `<small>${esc(s.note)}</small>` : ""}</li>`;
-}).join("") : `<li class="empty">No songs yet. Add one in the SONGS list.</li>`;
+const RATING = {
+  5: { label: "Favourite", cls: "love" },
+  4: { label: "Like", cls: "like" },
+  3: { label: "Fine", cls: "fine" },
+  2: { label: "Meh", cls: "meh" },
+  1: { label: "Hate", cls: "hate" }
+};
+
+let sortBest = false;
+
+function renderSongs() {
+  const list = [...SONGS];
+  if (sortBest) list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  document.getElementById("songList").innerHTML = list.length ? list.map(s => {
+    const t = s.link ? `<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title);
+    const r = RATING[s.rating];
+    const badge = r ? `<em class="badge ${r.cls}">${r.label}</em>` : "";
+    return `<li><span><span>${t}</span> <small>${esc(s.artist)}</small> ${badge}</span>${s.note ? `<small>${esc(s.note)}</small>` : ""}</li>`;
+  }).join("") : `<li class="empty">No songs yet. Add one in the SONGS list.</li>`;
+}
+
+document.getElementById("sortBtn").addEventListener("click", () => {
+  sortBest = !sortBest;
+  document.getElementById("sortBtn").textContent = sortBest ? "Sort: best first" : "Sort: my order";
+  renderSongs();
+});
+renderSongs();
 
 document.getElementById("heroArt").innerHTML = HERO.image
   ? `<img src="${esc(HERO.image)}" alt="${esc(HERO.alt)}">`
